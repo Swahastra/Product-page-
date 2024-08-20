@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top-container">
+            <div class="menu-icon">☰</div>
+            <div class="icons">
+                <div id="heart-icon" class="icon-inactive">❤️</div>
+                <div id="cart-icon" class="icon-inactive">🛒</div>
+            </div>
+        </div>
+        <div class="product-container">
+            <div class="product-details">
+                <h2>Product Name</h2>
+                <p>Description of the product goes here.</p>
+                <p id="product-price">Price: ₹100</p>
+                <div>
+                    <button id="decrement-button">-</button>
+                    <span id="quantity">1</span>
+                    <button id="increment-button">+</button>
+                </div>
+                <button id="add-to-cart">Add to Cart</button>
+                <button id="buy-now">Buy Now</button>
+            </div>
+            <div class="product-image">
+                <img src="https://i5.walmartimages.com/asr/93c398f1-aae3-449b-be71-36164d418bca.2cca0d1a81c3319bf8e62318fa8d2c3f.png" alt="Product Image">
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
