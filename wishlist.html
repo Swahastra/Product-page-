@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+        <div class="wishlist-container">
+            <h2>Your Cart</h2>
+
+            <div id="wishlist-items">
+                <!-- Wishlist items will be dynamically added here -->
+            </div>
+
+            <div class="wishlist-summary">
+                <p>Total Price: $<span id="total-price">0</span></p>
+            </div>
+
+            <div class="customer-details">
+                <h3>Customer Details</h3>
+                <input type="text" id="customer-name" placeholder="Enter your name" required>
+                <input type="text" id="customer-address" placeholder="Enter your address" required>
+                <input type="text" id="mobile-number" placeholder="Enter your mobile number" required>
+                <input type="text" id="pincode" placeholder="Enter your pincode" required>
+            </div>
+           
+            <button class="payment-button" id="payment-button">Proceed to Payment</button>
+            <button class="back-button" id="wishlist-back-button">Back to Products</button>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.location.href = 'index.html'; // Replace 'index.html' with the actual URL of your products page
+        }
+
+        function loadWishlist() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const wishlistContainer = document.getElementById('wishlist-items');
+            let totalPrice = 0;
+
+            cartItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('wishlist-item');
+                itemElement.innerHTML = `
+                    <img src="https://i5.walmartimages.com/asr/93c398f1-aae3-449b-be71-36164d418bca.2cca0d1a81c3319bf8e62318fa8d2c3f.png" alt="Product Image">
+                    <div class="wishlist-details">
+                        <h2>${item.name}</h2>
+                        <p>Price: $${item.price}</p>
+                        <p>Quantity: ${item.quantity}</p>
+                        <p>Total: $${item.price * item.quantity}</p>
+                    </div>
+                `;
+                wishlistContainer.appendChild(itemElement);
+                totalPrice += item.price * item.quantity;
+            });
+
+            // Display total price
+            document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+        }
+
+        function proceedToPayment() {
+            const name = document.getElementById('customer-name').value;
+            const address = document.getElementById('customer-address').value;
+            const mobile = document.getElementById('mobile-number').value;
+            const pincode = document.getElementById('pincode').value;
+
+            if (name && address && mobile && pincode) {
+                // Save customer details (optional)
+                localStorage.setItem('customerDetails', JSON.stringify({ name, address, mobile, pincode }));
+
+                // Redirect to payment page
+                window.location.href = 'payment.html'; // Replace 'payment.html' with the actual URL of your payment page
+            } else {
+                alert('Please enter all customer details.');
+            }
+        }
+
+        // Attach event listeners
+        document.getElementById('wishlist-back-button').addEventListener('click', goBack);
+        document.getElementById('payment-button').addEventListener('click', proceedToPayment);
+
+        // Load wishlist items when the page loads
+        window.onload = loadWishlist;
+    </script>
+</body>
+</html>
